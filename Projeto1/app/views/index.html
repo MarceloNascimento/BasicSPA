@@ -1,0 +1,102 @@
+﻿<style>
+    .required {
+        color: red;
+    }
+</style>
+
+
+<section ng-controller="ClientCtrl as vmClient">
+
+
+    <section class="panel panel-body" ng-show="vmClient.tela!=='Cadastro'">
+        <header class="panel panel-heading">
+            <h3 class="col-xs-9 col-md-9">
+                Clientes
+            </h3>
+            <section class="pull-right col-xs-1 col-md-1">
+                <button class="btn btn-default" ng-click="vmClient.goCadastro();"><i class="glyphicon glyphicon-file"> Novo</i></button>
+            </section>
+        </header>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF / CNPJ</th>
+                    <th>Telefone</th>
+                    <th>Tipo</th>
+                    <th colspan="2">Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr ng-repeat="client in vmClient.bagClient | orderBy:'nome' ">
+                    <td>{{client.nome}}</td>
+                    <td ng-if="client.tipo==='Física'">{{client.CPF}}</td>
+                    <td ng-if="client.tipo==='Jurídica'">{{client.CNPJ}}</td>
+                    <td>{{client.telefone}}</td>
+                    <td>{{client.tipo}}</td>
+                    <td style="cursor:pointer"><i class="glyphicon glyphicon-edit" ng-click="vmClient.goEditar(client);" title="Editar"></i></td>
+                    <td style="cursor:pointer"><i class="glyphicon glyphicon-remove" ng-click="vmClient.goDeletar(client.codigo);" title="Deletar"></i></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="panel-body" ng-show="vmClient.tela==='Cadastro'">
+        <header class="panel panel-heading">
+            <h3 class="col-xs-9 col-md-9">
+                Cadastro de Clientes
+            </h3>
+        </header>
+        <form name="clientForm" novalidate>
+            <div class="form-group">
+
+                <div class="col-xs-6 col-sm-6 col-md-6" ng-class="{'has-error': clientForm.nome.$touched && clientForm.nome.$invalid }">
+                    <label class="control-label">Nome <i class="required">*</i></label>
+                    <input type="text" class="form-control" name="nome" ng-model="vmClient.user.nome"
+                           placeholder="Nome do usuário" maxlength="200" required />
+                </div>
+                <div class="col-xs-6  col-sm-6 col-md-6">
+                    <div class="radio-inline " ng-class="{'has-error': clientForm.tipo.$touched && clientForm.tipo.$invalid }">
+
+                        <label class="control-label">Tipo de Pessoa <i class="required">*</i></label>
+                        <select class="form-control" name="tipo" ng-model="vmClient.user.tipo"
+                                ng-options="p for p in vmClient.bagTipos | orderBy: 'nome'" required>
+                            <option value="">Escolha uma opção</option>
+                        </select>
+                    </div>
+                    <div class="col-xs-4 col-md-6" ng-class="{'has-error': clientForm.telefone.$touched && clientForm.telefone.$invalid }">
+                        <label class="control-label">Telefone <i class="required">*</i></label>
+                        <input type="tel" class="form-control" name="telefone" ng-model="vmClient.user.telefone"
+                               maxlength="120" size="120" placeholder="+55-DDD-999-9999" />
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-xs-4 col-md-6" ng-show="vmClient.user.tipo==='Física'" ng-class="{'has-error': clientForm.CPF.$touched && clientForm.CPF.$invalid }">
+                        <label class="control-label">CPF <i class="required">*</i></label>
+                        <input type="text" class="form-control" name="CPF" ng-model="vmClient.user.CPF" ng-required="vmClient.user.tipo==='Física'"
+                               maxlength="120" size="120" placeholder="999.999.999-99" />
+                    </div>
+                    <div class="col-xs-4 col-md-6" ng-show="vmClient.user.tipo==='Jurídica'" ng-class="{'has-error': clientForm.CNPJ.$touched && clientForm.CNPJ.$invalid }">
+                        <label class="control-label">CNPJ <i class="required">*</i></label>
+                        <input type="text" class="form-control" name="CNPJ" ng-pattern="/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/" ng-model="vmClient.user.CNPJ" ng-required="vmClient.user.tipo==='Jurídica'"
+                               maxlength="120" size="120" placeholder="99.999.999/9999-99" />
+                    </div>
+
+
+                </div>
+        </form>
+
+
+    </section>
+
+    <footer class="text-right panel panel-footer" ng-show="vmClient.tela==='Cadastro'">
+        <button class="btn btn-primary" ng-click="vmClient.goSaveOrUpdate();" ng-disabled="clientForm.$invalid"><i class="glyphicon glyphicon glyphicon-floppy-disk"> Salvar</i></button>
+        <button class="btn btn-default" ng-click="vmClient.goConsulta();"><i class="glyphicon glyphicon glyphicon-menu-left"> Voltar</i></button>
+    </footer>
+
+</section>
+
+
+

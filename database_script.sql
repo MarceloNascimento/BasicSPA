@@ -1,0 +1,15 @@
+CREATE DATABASE ClientDB
+
+--GO TO model database
+GOTO ClientDB
+CREATE TABLE Client(
+codigo int NOT NULL IDENTITY(1,1) PRIMARY KEY, 
+nome NVARCHAR(200),
+tipo NVARCHAR(50),
+CPF  NVARCHAR(11),
+CNPJ NVARCHAR(14),
+telefone NVARCHAR(50)
+);
+
+SELECT * FROM Client
+
