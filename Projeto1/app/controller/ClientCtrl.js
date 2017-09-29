@@ -27,20 +27,21 @@
             function loadGrid() {               
                 loadAnimeService.show();                 
                 clientService.listAll(function (resp) {
-                    //if (resp !== null) {          
+                    if (resp !== null) {          
                     console.info(resp);
-                        vm.bagClient = resp.data;                         
-                    //}
+                    vm.bagClient = resp.data; 
+                    loadAnimeService.close();
+                   }
                         
                 });
-                
+
+                vm.bagTipos = ['Física', 'Jurídica'];
             }
 
             function goCadastro() {
                 loadAnimeService.show();
                 vm.tela = 'Cadastro';
                 vm.user = [];
-                vm.bagTipos = ['Física', 'Jurídica'];
                 loadAnimeService.close();
             }
 

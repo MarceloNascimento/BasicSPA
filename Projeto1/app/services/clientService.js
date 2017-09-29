@@ -21,10 +21,11 @@
             var _get = $http({
                 method: 'GET',
                 url: this.apiBase,
+                cache: false,
                 headers: {
                     'content-type': 'application/json', 'Access-Control-Allow-Origin': '*',
                     'Cache-Control': 'no-cache'
-                }, cache: false
+                } 
             });
             //To save or update some dto passede by front-end
             this.goSaveOrUpdate = function (dto, fn) {
