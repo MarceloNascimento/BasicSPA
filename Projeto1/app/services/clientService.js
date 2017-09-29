@@ -75,14 +75,17 @@
 
 
             this.listAll = function (fn) {
-                _get.then(fn,function (response) {
-                   
-                    console.log(response);
-                    return response.data;
-                    fn();
+
+                $http.get(this.apiBase, {
+                    'content-type': 'application/json', 
+                    'crossDomain': true, 'async': true,
+                    'cache-control': 'no-cache'
+                }).then(fn, function (resp) {
+                    return resp.data;
+
                 }, function (error) {
-                    messageService.danger(error);
-                });
+                    alert(error);
+                });               
             };
 
 

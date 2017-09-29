@@ -11,28 +11,29 @@
                 //bag from Services which wil be bringing a list of objects from db
                 vm.bagClient = [];
                 vm.user = {};
-                vm.loadGrid = loadGrid;
+                //vm.loadGrid = loadGrid;
                 vm.goCadastro = goCadastro;
-                vm.goConsulta = goConsulta;  
+                vm.goConsulta = goConsulta;
                 vm.tela = 'Consulta';
             }
 
-           
+            startVm();
 
             function getVm() {
                 return vm;
             }
 
 
-            function loadGrid() {               
-                loadAnimeService.show();                 
+            vm.loadGrid = function () {
+                loadAnimeService.show();
                 clientService.listAll(function (resp) {
-                    if (resp !== null) {          
-                    console.info(resp);
-                    vm.bagClient = resp.data; 
-                    loadAnimeService.close();
-                   }
-                        
+                    if (resp !== null) {
+                        console.info(resp);
+                        vm.tela = 'Consulta';
+                        vm.bagClient = resp.data;
+                        loadAnimeService.close();
+                    }
+
                 });
 
                 vm.bagTipos = ['Física', 'Jurídica'];
@@ -46,20 +47,20 @@
             }
 
             function goConsulta() {
-                vm.bagClient = null;   
-                vm.bagClient = [];   
+                vm.bagClient = null;
+                vm.bagClient = [];
                 loadAnimeService.show();
-                vm.loadGrid();   
                 vm.tela = 'Consulta';
+                vm.loadGrid();
                 loadAnimeService.close();
             }
 
 
             vm.goDeletar = function (codigo) {
-                loadAnimeService.show();                
+                loadAnimeService.show();
                 clientService.delete(codigo, function (resp) {
-                    if (resp !== null) {                          
-                        vm.goConsulta();  
+                    if (resp !== null) {
+                        vm.goConsulta();
                         messageService.success("Operação realizada com sucesso!");
                     }
                 });
@@ -68,24 +69,24 @@
 
             vm.goEditar = function (obj) {
                 loadAnimeService.show();
-                vm.tela = 'Cadastro';               
+                vm.tela = 'Cadastro';
                 vm.user = obj;
-                loadAnimeService.close();                
+                loadAnimeService.close();
             }
 
             vm.goSaveOrUpdate = function () {
                 loadAnimeService.show();
-                clientService.goSaveOrUpdate(vm.user, function (resp) {                    
-                    if (resp !== null) {                       
+                clientService.goSaveOrUpdate(vm.user, function (resp) {
+                    if (resp !== null) {
                         vm.loadGrid();
-                        messageService.success("Operação realizada com sucesso!");                       
+                        messageService.success("Operação realizada com sucesso!");
                         loadAnimeService.close();
                     }
                 });
 
             }
 
-            startVm();
+
             vm.loadGrid();
 
         }]);

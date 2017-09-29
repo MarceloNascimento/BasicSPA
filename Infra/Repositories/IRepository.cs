@@ -14,7 +14,7 @@ namespace Infra.Repositories
         IEnumerable<IDTO> ListAll();
         int Update(IDTO dto);
         void Delete(int codigo);
-        bool ValidateRepository(IDTO dto);
+        bool ValidateEntitie(IDTO dto);
         IDTO GetById(int codigo);
 
     }

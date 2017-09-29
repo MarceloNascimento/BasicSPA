@@ -86,24 +86,7 @@ namespace Infra.Repositories
 
 
 
-        /// <summary>
-        /// function to validate if this dto is according into business rules
-        /// </summary>
-        /// <param name="dto">a dto which will be validated</param>
-        public bool ValidateRepository(IDTO dto)
-        {
-            ClientDTO validatingDTO = (ClientDTO)dto;
-            bool validated = false;
-            if (!string.IsNullOrEmpty(validatingDTO.nome) || !string.IsNullOrWhiteSpace(validatingDTO.nome))
-            {
-                throw new Exception("O campo nome é obrigatório");
-            }
-            else
-            {
-                validated = true;
-            }
-            return validated;
-        }
+      
 
         /// <summary>
         /// to insert a new object in db
@@ -114,7 +97,7 @@ namespace Infra.Repositories
             int id = 0;
             try
             {
-                if (ValidateRepository(dto))
+                if (ValidateEntitie(dto))
                 {
                     Client client = Mapper.Map<Client>(ValidateBusiness(dto));
 
@@ -147,7 +130,7 @@ namespace Infra.Repositories
             int id = 0;
             try
             {
-                if (ValidateRepository(dto))
+                if (ValidateEntitie(dto))
                 {
                     Client client = Mapper.Map<Client>(ValidateBusiness(dto));
                     using (var db = new EFModel())
@@ -167,6 +150,24 @@ namespace Infra.Repositories
         }
 
 
+        /// <summary>
+        /// function to validate if this dto is according into business rules
+        /// </summary>
+        /// <param name="dto">a dto which will be validated</param>
+        public bool ValidateEntitie(IDTO dto)
+        {
+            ClientDTO clientDTO = (ClientDTO)dto;
+            bool validated = false;
+            if (string.IsNullOrEmpty(clientDTO.nome) || string.IsNullOrWhiteSpace(clientDTO.nome))
+            {
+                throw new Exception("O campo nome é obrigatório");
+            }
+            else
+            {
+                validated = true;
+            }
+            return validated;
+        }
 
         /// <summary>
         /// function to validate business rules

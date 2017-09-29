@@ -18,7 +18,7 @@ namespace Tests
         public void ListAllClientTest()
         {
             AutoMapperConfig.RegisterMappings();
-            IList<ClientDTO> clients = rep.ListAll();
+            List<ClientDTO> clients = (List<ClientDTO>)rep.ListAll();
             Assert.IsTrue(clients.Count > 0);
 
         }
@@ -31,7 +31,7 @@ namespace Tests
             dto.nome = "Marcelo";
             dto.telefone = "022998701555";
             dto.CPF = "01010100101";
-            dto.tipo = "F";           
+            dto.tipo = "F";
             rep.Save(dto);
         }
 
