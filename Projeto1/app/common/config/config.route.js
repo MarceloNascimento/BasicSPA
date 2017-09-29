@@ -12,11 +12,11 @@ app.config(function ($routeProvider, $locationProvider) {
 
         .when('/', {
             templateUrl: '../app/views/index.html',
-            controller: 'ClientCtrl'
+            controllerAs: 'vm',
         })      
         .when('/404', {
             templateUrl: 'app/views/Error/404.html',   
-            controller: 'ClientCtrl'
+            controllerAs: 'vm',
         })
         //otherwise, will redirect '/'
         .otherwise({ redirectTo: '/404' });

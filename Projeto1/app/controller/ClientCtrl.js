@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    angular.module('app').controller('ClientCtrl', ['$scope', '$injector', '$timeout', 'loadAnimeService', 'messageService', '$location', 'clientService',
+    app.controller('ClientCtrl', ['$scope', '$injector', '$timeout', 'loadAnimeService', 'messageService', '$location', 'clientService',
         function ($scope, $injector, $timeout, loadAnimeService, messageService, $location, clientService) {
 
             var vm = this;
@@ -13,10 +13,11 @@
                 vm.user = {};
                 vm.loadGrid = loadGrid;
                 vm.goCadastro = goCadastro;
-                vm.goConsulta = goConsulta;               
+                vm.goConsulta = goConsulta;  
+                vm.tela = 'Consulta';
             }
 
-            startVm();
+           
 
             function getVm() {
                 return vm;
@@ -24,30 +25,30 @@
 
 
             function loadGrid() {               
-                loadAnimeService.show();
-                vm.bagClient = [];                
+                loadAnimeService.show();                 
                 clientService.listAll(function (resp) {
-                    if (resp !== null) {
-                        console.info(resp);
-                        vm.bagClient = resp.data; 
-                        vm.tela = 'Consulta';
-                        loadAnimeService.close();
-                    }
+                    //if (resp !== null) {          
+                    console.info(resp);
+                        vm.bagClient = resp.data;                         
+                    //}
+                        
                 });
-
-                vm.bagTipos = ['Física','Jurídica'];
+                
             }
 
             function goCadastro() {
                 loadAnimeService.show();
                 vm.tela = 'Cadastro';
                 vm.user = [];
+                vm.bagTipos = ['Física', 'Jurídica'];
                 loadAnimeService.close();
             }
 
             function goConsulta() {
+                vm.bagClient = null;   
+                vm.bagClient = [];   
                 loadAnimeService.show();
-                vm.loadGrid();
+                vm.loadGrid();   
                 vm.tela = 'Consulta';
                 loadAnimeService.close();
             }
@@ -83,6 +84,7 @@
 
             }
 
+            startVm();
             vm.loadGrid();
 
         }]);

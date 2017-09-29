@@ -8,8 +8,9 @@ namespace Infra.Repositories
     using System;
     using System.Collections.Generic;
     using System.Linq;
-   public class ClientRepository : IRepository
+    public class ClientRepository : IRepository
     {
+
         /// <summary>
         /// Method constructor in here we mapped dto to entitie and reverse by automapper
         /// </summary>
@@ -21,7 +22,7 @@ namespace Infra.Repositories
         /// <summary>
         /// to list all objects
         /// </summary>
-        public ClientDTO GetById(int codigo)
+        public IDTO GetById(int codigo)
         {
             ClientDTO obj;
             using (var db = new EFModel())
@@ -66,20 +67,21 @@ namespace Infra.Repositories
         /// <summary>
         /// to list all objects
         /// </summary>
-        public IList<ClientDTO> ListAll()
+        public IEnumerable<IDTO> ListAll()
         {
-            List<ClientDTO> AllObj;
-            using (var db = new EFModel())
-            {
-                // Display all Clients from the database 
-                var query = from b in db.Client select b;
-                List<Client> list = query.ToList();
-                AllObj = Mapper.Map<List<Client>, List<ClientDTO>>(list);
+            IEnumerable<IDTO> AllObj = new List<ClientDTO>();
+                using (var db = new EFModel())
+                {
+                    // Display all Clients from the database 
+                    var query = from b in db.Client select b;
+                    List<Client> list = query.ToList();
+                    AllObj = Mapper.Map<List<Client>, List<ClientDTO>>(list);
 
-            }
+                }
 
 
-            return AllObj;
+                return AllObj;
+            
         }
 
 
@@ -92,10 +94,10 @@ namespace Infra.Repositories
         {
             ClientDTO validatingDTO = (ClientDTO)dto;
             bool validated = false;
-            if(string.IsNullOrEmpty(validatingDTO.nome) || string.IsNullOrWhiteSpace(validatingDTO.nome))
+            if (!string.IsNullOrEmpty(validatingDTO.nome) || !string.IsNullOrWhiteSpace(validatingDTO.nome))
             {
                 throw new Exception("O campo nome é obrigatório");
-            }           
+            }
             else
             {
                 validated = true;
@@ -114,7 +116,7 @@ namespace Infra.Repositories
             {
                 if (ValidateRepository(dto))
                 {
-                    Client client = Mapper.Map<Client>(dto);
+                    Client client = Mapper.Map<Client>(ValidateBusiness(dto));
 
                     using (var db = new EFModel())
                     {
@@ -147,9 +149,9 @@ namespace Infra.Repositories
             {
                 if (ValidateRepository(dto))
                 {
-                    Client client = Mapper.Map<Client>(dto);
+                    Client client = Mapper.Map<Client>(ValidateBusiness(dto));
                     using (var db = new EFModel())
-                    { 
+                    {
                         // Display all Clients from the database                        
                         db.Entry(client).State = System.Data.Entity.EntityState.Modified;
                         id = db.SaveChanges();
@@ -164,5 +166,30 @@ namespace Infra.Repositories
             }
         }
 
+
+
+        /// <summary>
+        /// function to validate business rules
+        /// </summary>
+        /// <param name="dto">a dto which will be validated</param>
+        public IDTO ValidateBusiness(IDTO dto)
+        {
+            ClientDTO clientdto = (ClientDTO)dto;
+            bool validated = false;
+            if (!string.IsNullOrEmpty(clientdto.tipo) &&
+                !string.IsNullOrWhiteSpace(clientdto.tipo))
+            {
+                if (clientdto.tipo == "Física")
+                {
+                    clientdto.CNPJ = "";
+                }
+                else if(clientdto.tipo != "Física")
+                {
+                    clientdto.CPF = "";
+                }
+
+            }
+            return clientdto;
+        }
     }
 }
