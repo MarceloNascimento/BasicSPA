@@ -55,6 +55,18 @@
                 loadAnimeService.close();
             }
 
+            vm.validaPessoa = function () {
+                loadAnimeService.show();
+                if (vm.user.tipo === 'Física') {
+                    vm.user.cnpj = '';
+                    loadAnimeService.close();
+                }
+                else if (vm.user.tipo === 'Física') {
+                    vm.user.cpf = '';
+                    loadAnimeService.close();
+                }
+            }
+
 
             vm.goDeletar = function (codigo) {
                 loadAnimeService.show();

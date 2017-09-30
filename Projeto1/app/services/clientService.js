@@ -6,27 +6,9 @@
     app.service('clientService', ['$http', 'messageService',
         'locationhostService',
         function ($http, messageService, locationhostService) {
-            this.dto = {};
-
-
+        
             this.apiBase = locationhostService.apiBase + 'api/client';;
-
-            //var _get = $http.get(this.apiBase, {
-            //    'content-type': 'application/json',
-            //    'crossDomain': true, 'async': true,               
-            //    'cache-control': 'no-cache'
-            //}, { cache: false });
-
-
-            var _get = $http({
-                method: 'GET',
-                url: this.apiBase,
-                cache: false,
-                headers: {
-                    'content-type': 'application/json', 'Access-Control-Allow-Origin': '*',
-                    'Cache-Control': 'no-cache'
-                } 
-            });
+                        
             //To save or update some dto passede by front-end
             this.goSaveOrUpdate = function (dto, fn) {
                 var data = {
