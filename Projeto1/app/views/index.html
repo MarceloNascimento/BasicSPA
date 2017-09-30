@@ -59,6 +59,12 @@
                            placeholder="Nome do usuário" maxlength="200" required />
                 </div>
                 <div class="col-xs-6  col-sm-6 col-md-6">
+                    <div class="col-xs-4 col-md-6" ng-class="{'has-error': clientForm.telefone.$touched && clientForm.telefone.$invalid }">
+                        <label class="control-label">Telefone <i class="required">*</i></label>
+                        <input type="tel" class="form-control" name="telefone" ng-model="vmClient.user.telefone"
+                               maxlength="15" size="120" placeholder="99-999-999-999" ui-mask="99-999-999-999" ui-mask-placeholder-char="-" />
+                    </div>
+
                     <div class="radio-inline " ng-class="{'has-error': clientForm.tipo.$touched && clientForm.tipo.$invalid }">
 
                         <label class="control-label">Tipo de Pessoa <i class="required">*</i></label>
@@ -67,22 +73,21 @@
                             <option value="">Escolha uma opção</option>
                         </select>
                     </div>
-                    <div class="col-xs-4 col-md-6" ng-class="{'has-error': clientForm.telefone.$touched && clientForm.telefone.$invalid }">
-                        <label class="control-label">Telefone <i class="required">*</i></label>
-                        <input type="tel" class="form-control" name="telefone" ng-model="vmClient.user.telefone"
-                               maxlength="120" size="120" placeholder="+55-DDD-999-9999" />
-                    </div>
+                   
                 </div>
                 <div class="form-group">
 
                     <div class="col-xs-4 col-md-6" ng-show="vmClient.user.tipo==='Física'" ng-class="{'has-error': clientForm.CPF.$touched && clientForm.CPF.$invalid }">
                         <label class="control-label">CPF <i class="required">*</i></label>
-                        <input type="text" class="form-control" name="CPF" ng-model="vmClient.user.cpf" ng-required="vmClient.user.tipo==='Física'"
-                               maxlength="11" size="120" placeholder="999.999.999-99" />
+                        <input type="text" class="form-control" name="CPF"  ng-model="vmClient.user.cpf"
+                               validate-cpf ui-mask="999.999.999-99"  ng-required="vmClient.user.tipo==='Física'" 
+                               maxlength="14" size="120" placeholder="999.999.999-99"  ui-mask-placeholder-char="." />
                     </div>
                     <div class="col-xs-4 col-md-6" ng-show="vmClient.user.tipo==='Jurídica'" ng-class="{'has-error': clientForm.CNPJ.$touched && clientForm.CNPJ.$invalid }">
                         <label class="control-label">CNPJ <i class="required">*</i></label>
-                        <input type="text" class="form-control" name="CNPJ" ng-pattern="/^\d{3}\.\d{3}\.\d{3}\-\d{2}$/" ng-model="vmClient.user.cnpj" ng-required="vmClient.user.tipo==='Jurídica'"
+                        <input type="text" class="form-control" name="CNPJ"                              
+                               ng-model="vmClient.user.cnpj" validate-cnpj 
+                               ui-mask="99.999.999/9999-99" ng-required="vmClient.user.tipo==='Jurídica'"
                                maxlength="19" size="120" placeholder="99.999.999/9999-99" />
                     </div>
 

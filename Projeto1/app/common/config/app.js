@@ -3,5 +3,9 @@
 var app = angular.module('app', [
     'ngAnimate',
     'ngRoute',
-    'ngResource',    
+    'ngResource', 
+    'ui.mask',
+    'validate-cnpj',
+    'validate-cpf',
+    
 ]);

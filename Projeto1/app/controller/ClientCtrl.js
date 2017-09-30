@@ -61,7 +61,7 @@
                     vm.user.cnpj = '';
                     loadAnimeService.close();
                 }
-                else if (vm.user.tipo === 'Física') {
+                else if (vm.user.tipo !== 'Física') {
                     vm.user.cpf = '';
                     loadAnimeService.close();
                 }
