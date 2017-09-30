@@ -1,5 +1,5 @@
-# Client-SPA @All directy reserved by Marcelo do Nascimento
-a .NET test application
+# Client-SPA  V1.0
+.NET test application
 
 Software de avaliação 
  - Para implementação do mesmo é recomendável utilizar o SQL server versão 2016, 
@@ -16,3 +16,6 @@ Software de avaliação
 
 
 - Duvidas sobre implementação gentileza enviar email para marcelo.analistadesistemas@gmail.com
+
+@All directy reserved by Marcelo do Nascimento 
+
