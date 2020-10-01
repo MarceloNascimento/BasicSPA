@@ -1,4 +1,4 @@
-# BaseToSPA  V1.0
+# BasicSPA V1.0
 .NET test application
 
 Software de avaliação 
