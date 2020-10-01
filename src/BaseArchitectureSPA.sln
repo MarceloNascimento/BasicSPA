@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Projeto1", "Projeto1\Projeto1.csproj", "{404A03F5-9362-4D3E-BF3D-03EF1C86290A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presenter", "Projeto1\Presenter.csproj", "{404A03F5-9362-4D3E-BF3D-03EF1C86290A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Design", "1 - Design", "{F756D43A-4AAD-475B-9927-79073922395D}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Presentation", "1 - Presentation", "{F756D43A-4AAD-475B-9927-79073922395D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Domain", "3-Domain", "{21A32C6A-D4F5-484B-893E-39A0EA18D3FB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{21A32C6A-D4F5-484B-893E-39A0EA18D3FB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Driven", "2-Driven", "{5DA4DB14-12CC-4D2D-BC74-CBC086A34B09}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2- Core", "2- Core", "{5DA4DB14-12CC-4D2D-BC74-CBC086A34B09}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIServices", "APIServices\APIServices.csproj", "{0EC1669A-1EC4-4A21-9760-7B4E210DBE34}"
 EndProject
